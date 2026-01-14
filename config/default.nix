@@ -17,5 +17,7 @@ _: {
     ./plugins/lsp/lsp.nix
     ./settings.nix
     ./keybindings.nix
+
+    ./plugins/themes.nix
   ];
 }
