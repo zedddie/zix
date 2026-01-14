@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   config = {
     opts = {
       number = true;
@@ -20,14 +19,10 @@
       splitright = true;
       splitbelow = true;
       list = true;
-      #       listchars = [
-      # tab = '» ',
-      # trail = '·'
-      # nbsp = '␣'
-      # ]
-      # incommand = "split";
       confirm = true;
       guicursor = "a:block";
+      # clipboard.providers.wl-copy.enable = true;
+      # clipboard.providers.xclip.enable = true;
 
     };
   };
