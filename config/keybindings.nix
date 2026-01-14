@@ -123,7 +123,8 @@
     {
       mode = "n";
       key = "<C-e>";
-      action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
+      action.__raw =
+        "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
     }
     {
       mode = "n";
@@ -145,6 +146,11 @@
       key = "<C-m>";
       action.__raw = "function() require'harpoon':list():select(4) end";
     }
-
+    {
+      mode = "t";
+      key = "<Esc><Esc>";
+      action = "<C-\\><C-n>";
+      options = { desc = "Exit terminal mode"; };
+    }
   ];
 }
