@@ -15,6 +15,7 @@ _: {
     ./plugins/general/treesitter.nix
     ./plugins/general/harpoon.nix
     ./plugins/lsp/lsp.nix
+    ./autocmd.nix
     ./settings.nix
     ./keybindings.nix
 
