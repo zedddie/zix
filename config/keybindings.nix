@@ -15,12 +15,6 @@
       options.desc = "Open diagnostic [Q]uickfix list";
     }
     {
-      mode = "n";
-      key = "K";
-      action = "vim.lsp.buf.hover";
-      options.silent = true;
-    }
-    {
       mode = "t";
       key = "<Esc><Esc>";
       action = "<C-\\><C-n>";
