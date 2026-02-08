@@ -19,6 +19,6 @@ _: {
     ./settings.nix
     ./keybindings.nix
 
-    ./plugins/themes.nix
+    ./plugins/themes/themes.nix
   ];
 }
