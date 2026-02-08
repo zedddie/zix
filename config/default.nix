@@ -20,5 +20,6 @@ _: {
     ./keybindings.nix
 
     ./plugins/themes/themes.nix
+    ./plugins/general/cord.nix
   ];
 }
