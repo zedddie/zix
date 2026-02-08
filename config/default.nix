@@ -18,6 +18,7 @@ _: {
     ./autocmd.nix
     ./settings.nix
     ./keybindings.nix
+    ./plugins/general/tt.nix
 
     ./plugins/themes/themes.nix
     ./plugins/general/cord.nix
