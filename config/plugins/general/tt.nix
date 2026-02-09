@@ -16,6 +16,8 @@
       options.desc = "Open ToggleTerm";
     }
     {
+      #TODO: rebind to something sound (ctrl-esc mb, so it owuld be easy to use
+      # vi mode inside of tt
       mode = "t";
       key = "<Esc>";
       action = "<C-\\><C-n>";
