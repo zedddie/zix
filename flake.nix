@@ -20,8 +20,8 @@
       perSystem =
         { system, pkgs, ... }:
         let
-          nixvimLib = nixvim.lib.${system};
-          nixvim' = nixvim.legacyPackages.${system};
+          nixvimLib = nixvim.lib.${pkgs.system};
+          nixvim' = nixvim.legacyPackages.${pkgs.system};
           nixvimModule = {
             inherit pkgs; # or alternatively, set `pkgs`
             module = import ./config; # import the module directly
