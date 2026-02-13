@@ -5,7 +5,7 @@
       display = {
         theme = "catppuccin";
         flavor = "dark";
-        swap_icons = true;
+        swap_icons = false;
       };
       timestamp = {
         enabled = true;
