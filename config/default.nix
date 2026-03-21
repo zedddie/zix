@@ -22,5 +22,6 @@ _: {
 
     ./plugins/themes/themes.nix
     ./plugins/general/cord.nix
+    ./plugins/general/scroll-thingie.nix
   ];
 }
