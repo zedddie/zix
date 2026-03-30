@@ -86,71 +86,72 @@
         installCargo = false;
         installRustc = false;
 
-        settings = {
-          linkedProjects = [
-            "Cargo.toml"
-            "compiler/rustc_codegen_cranelift/Cargo.toml"
-            "compiler/rustc_codegen_gcc/Cargo.toml"
-            "library/Cargo.toml"
-            "src/bootstrap/Cargo.toml"
-            "src/tools/rust-analyzer/Cargo.toml"
-          ];
-          check = {
-            invocationStrategy = "once";
-            overrideCommand = [
-              "python3"
-              "x.py"
-              "check"
-              "compiler"
-              "--json-output"
-              "--build-dir"
-              "build-rust-analyzer"
-            ];
-          };
-          rustfmt = {
-            overrideCommand = [
-              "build/host/rustfmt/bin/rustfmt"
-              "--edition=2024"
-            ];
-          };
-          procMacro = {
-            enable = true;
-            server = "build/host/stage0/libexec/rust-analyzer-proc-macro-srv";
-          };
-          rustc = {
-            source = "./Cargo.toml";
-          };
-          cargo = {
-            sysrootSrc = "./library";
-            extraEnv = {
-              RUSTC_BOOTSTRAP = "1";
-            };
-            buildScripts = {
-              enable = true;
-              invocationStrategy = "once";
-              overrideCommand = [
-                "python3"
-                "x.py"
-                "check"
-                "--json-output"
-                "--compile-time-deps"
-                "--build-dir"
-                "build-rust-analyzer"
-              ];
-            };
-          };
-          server = {
-            extraEnv = {
-              RUSTUP_TOOLCHAIN = "nightly";
-            };
-          };
-
-          filetype.extension = {
-            fixed = "rust";
-            pp = "rust";
-            mir = "rust";
-          };
-        };
+        # NOTE: don't forget to uncomment!!!!
+        # settings = {
+        #   linkedProjects = [
+        #     "Cargo.toml"
+        #     "compiler/rustc_codegen_cranelift/Cargo.toml"
+        #     "compiler/rustc_codegen_gcc/Cargo.toml"
+        #     "library/Cargo.toml"
+        #     "src/bootstrap/Cargo.toml"
+        #     "src/tools/rust-analyzer/Cargo.toml"
+        #   ];
+        #   check = {
+        #     invocationStrategy = "once";
+        #     overrideCommand = [
+        #       "python3"
+        #       "x.py"
+        #       "check"
+        #       "compiler"
+        #       "--json-output"
+        #       "--build-dir"
+        #       "build-rust-analyzer"
+        #     ];
+        #   };
+        #   rustfmt = {
+        #     overrideCommand = [
+        #       "build/host/rustfmt/bin/rustfmt"
+        #       "--edition=2024"
+        #     ];
+        #   };
+        #   procMacro = {
+        #     enable = true;
+        #     server = "build/host/stage0/libexec/rust-analyzer-proc-macro-srv";
+        #   };
+        #   rustc = {
+        #     source = "./Cargo.toml";
+        #   };
+        #   cargo = {
+        #     sysrootSrc = "./library";
+        #     extraEnv = {
+        #       RUSTC_BOOTSTRAP = "1";
+        #     };
+        #     buildScripts = {
+        #       enable = true;
+        #       invocationStrategy = "once";
+        #       overrideCommand = [
+        #         "python3"
+        #         "x.py"
+        #         "check"
+        #         "--json-output"
+        #         "--compile-time-deps"
+        #         "--build-dir"
+        #         "build-rust-analyzer"
+        #       ];
+        #     };
+        #   };
+        #   server = {
+        #     extraEnv = {
+        #       RUSTUP_TOOLCHAIN = "nightly";
+        #     };
+        #   };
+        #
+        #   filetype.extension = {
+        #     fixed = "rust";
+        #     pp = "rust";
+        #     mir = "rust";
+        #   };
+        # };
       };
 
       # ...etc. See `https://nix-community.github.io/nixvim/plugins/lsp` for a list of pre-configured LSPs
