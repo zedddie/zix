@@ -1,25 +1,6 @@
-{ pkgs, lib, ... }:
+{ ... }:
 {
-  plugins.blink-cmp.enable = lib.mkForce false;
-
-  extraPlugins = [ pkgs.vimPlugins.coc-nvim ];
-
-  extraPackages = [ pkgs.nodejs ];
-
   extraConfigLua = ''
-    local function find_ra()
-      local home = os.getenv("HOME") or ""
-      local candidates = {
-        home .. "/.nix-profile/bin/rust-analyzer",
-        "/run/current-system/sw/bin/rust-analyzer",
-        "/nix/var/nix/profiles/default/bin/rust-analyzer",
-      }
-      for _, p in ipairs(candidates) do
-        if vim.fn.executable(p) == 1 then return p end
-      end
-      return "rust-analyzer"
-    end
-
     vim.g.coc_user_config = {
       languageserver = {
         rust = {
@@ -28,11 +9,39 @@
           rootPatterns = { "Cargo.toml", "rust-project.json" },
           initializationOptions = {
             checkOnSave = true,
-            check = { command = "clippy" },
-            procMacro = { enable = true },
+            linkedProjects = {
+              "Cargo.toml",
+              "compiler/rustc_codegen_cranelift/Cargo.toml",
+              "compiler/rustc_codegen_gcc/Cargo.toml",
+              "library/Cargo.toml",
+              "src/bootstrap/Cargo.toml",
+              "src/tools/rust-analyzer/Cargo.toml",
+            },
+            check = {
+              invocationStrategy = "once",
+              overrideCommand = { "python3", "x.py", "check", "compiler", "--json-output", "--build-dir", "build-rust-analyzer" },
+            },
+            rustfmt = {
+              overrideCommand = { "build/host/rustfmt/bin/rustfmt", "--edition=2024" },
+            },
+            procMacro = {
+              enable = true,
+              server = "build/host/stage0/libexec/rust-analyzer-proc-macro-srv",
+            },
+            rustc = {
+              source = "./Cargo.toml",
+            },
             cargo = {
-              buildScripts = { enable = true },
-              features = "all",
+              sysrootSrc = "./library",
+              extraEnv = { RUSTC_BOOTSTRAP = "1" },
+              buildScripts = {
+                enable = true,
+                invocationStrategy = "once",
+                overrideCommand = { "python3", "x.py", "check", "--json-output", "--compile-time-deps", "--build-dir", "build-rust-analyzer" },
+              },
+            },
+            server = {
+              extraEnv = { RUSTUP_TOOLCHAIN = "nightly" },
             },
             inlayHints = {
               enable = true,
@@ -155,4 +164,5 @@
       options = { silent = true; expr = true; noremap = true; };
     }
   ];
+}
 }

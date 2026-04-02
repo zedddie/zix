@@ -14,8 +14,9 @@ _: {
     ./plugins/general/telescope.nix
     ./plugins/general/treesitter.nix
     ./plugins/general/harpoon.nix
-    # ./plugins/lsp/lsp.nix
-    ./plugins/lsp/coc.nix
+    # ./plugins/lsp/lsp.nix  # <-- old lsp 
+    # ./plugins/lsp/coc.nix # <-- default CoC.nvim
+    ./plugins/lsp/coc-rustc.nix # <-- rustc(x.py) CoC.nvim
     ./autocmd.nix
     ./settings.nix
     ./keybindings.nix
