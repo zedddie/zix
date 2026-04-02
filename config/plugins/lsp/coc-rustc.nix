@@ -1,6 +1,27 @@
-{ ... }:
+{ pkgs, lib, ... }:
 {
+  plugins.blink-cmp.enable = lib.mkForce false;
+
+  extraPlugins = [ pkgs.vimPlugins.coc-nvim ];
+
+  extraPackages = [ pkgs.nodejs ];
+
   extraConfigLua = ''
+    local function find_ra()
+      local cwd = vim.fn.getcwd()
+      local home = os.getenv("HOME") or ""
+      local candidates = {
+        cwd .. "/build-rust-analyzer/host/stage1/bin/rustc",
+        home .. "/.nix-profile/bin/rust-analyzer",
+        "/run/current-system/sw/bin/rust-analyzer",
+        "/nix/var/nix/profiles/default/bin/rust-analyzer",
+      }
+      for _, p in ipairs(candidates) do
+        if vim.fn.executable(p) == 1 then return p end
+      end
+      return "rust-analyzer"
+    end
+
     vim.g.coc_user_config = {
       languageserver = {
         rust = {
@@ -164,5 +185,4 @@
       options = { silent = true; expr = true; noremap = true; };
     }
   ];
-}
 }
